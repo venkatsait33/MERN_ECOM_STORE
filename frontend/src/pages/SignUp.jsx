@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginGif from "../assest/signin.gif";
 import ImageToBase64 from "../helpers/ImageToBase64";
+import Api from "../api/Api";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,13 +18,34 @@ function SignUp() {
     conformPassword: "",
     profilePicture: "",
   });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setData("");
+    if (data.password === data.conformPassword) {
+      const responseData = await fetch(Api.signUp.url, {
+        method: Api.signUp.method,
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const apiData = await responseData.json();
+      if (apiData.success) {
+        toast.success(apiData.message);
+        navigate("/login");
+      }
+      if (apiData.error) {
+        toast.error(apiData.message);
+      }
+
+      console.log(apiData);
+    } else {
+      toast.error("check password and conform password");
+    }
   };
 
   const handleUploadPicture = async (e) => {
@@ -40,7 +65,7 @@ function SignUp() {
             <img
               src={data?.profilePicture || loginGif}
               alt="UserProfile"
-              className="h-[200px] rounded-full w-[250px]"
+              className="w-25 h-22 rounded-xl"
             />
             <form>
               <label>
@@ -136,6 +161,7 @@ function SignUp() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginGif from "../assest/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
+import Api from "../api/Api";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,13 +13,28 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setData("");
+    const responseData = await fetch("http://localhost:8080/api/signin", {
+      method: Api.signIn.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const apiData = await responseData.json();
+
+    toast.success(apiData.message);
+    navigate("/");
+    if (apiData.error) {
+      toast.error(apiData.message);
+    }
   };
 
   return (
@@ -31,7 +50,6 @@ const Login = () => {
               alt="UserProfile"
               className="w-20 h-30 rounded-xl"
             />
-          
           </div>
           <form className="card-body" onSubmit={handleSubmit}>
             <div className="form-control">
@@ -90,6 +108,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
