@@ -35,7 +35,7 @@ const App = () => {
       <UserContext.Provider value={{ fetchUserDetails }}>
         <ToastContainer position="top-center" />
         <Navbar />
-        <main className="min-h-[calc(100vh-100px)]">
+        <main className="min-h-[calc(100vh-100px)] w-full">
           <Outlet />
         </main>
         <Footer />
