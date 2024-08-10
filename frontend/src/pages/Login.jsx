@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import loginGif from "../assest/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Api from "../api/Api";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserContext from "../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,9 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const { fetchUserDetails } = useContext(UserContext);
+  console.log(fetchUserDetails());
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -29,9 +33,12 @@ const Login = () => {
       body: JSON.stringify(data),
     });
     const apiData = await responseData.json();
+    if (apiData.success) {
+      toast.success("user successfully signed in");
+      navigate("/");
+      fetchUserDetails();
+    }
 
-    toast.success(apiData.message);
-    navigate("/");
     if (apiData.error) {
       toast.error(apiData.message);
     }

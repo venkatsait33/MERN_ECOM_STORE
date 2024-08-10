@@ -11,20 +11,20 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "", element: <Home /> },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword />,
+      },
       // Add more routes here
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/forgotpassword",
-    element: <ForgotPassword />,
   },
 ]);
 export default router;
