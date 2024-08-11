@@ -9,13 +9,21 @@ const Api = {
     url: `${backendDomainURL}/api/signin`,
     method: "post",
   },
+  logout: {
+    url: `${backendDomainURL}/api/logout`,
+    method: "get",
+  },
   current_user: {
     url: `${backendDomainURL}/api/user-details`,
     method: "get",
   },
-  logout: {
-    url: `${backendDomainURL}/api/logout`,
+  all_users: {
+    url: `${backendDomainURL}/api/all-users`,
     method: "get",
+  },
+  update_users: {
+    url: `${backendDomainURL}/api/update-user`,
+    method: "post",
   },
 };
 

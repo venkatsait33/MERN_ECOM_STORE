@@ -18,7 +18,6 @@ const App = () => {
     });
 
     const apiData = await responseData.json();
-    console.log(apiData);
     
 
     if (apiData.success) {

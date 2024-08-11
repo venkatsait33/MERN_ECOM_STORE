@@ -1,11 +1,20 @@
+import { useEffect } from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import Role from "../utils/Role";
 
 const AdminPanel = () => {
   const user = useSelector((state) => state?.user?.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.data?.role !== Role.ADMIN) {
+      navigate("/");
+    }
+  }, [user]);
   return (
-    <div className="md:flex sm:flex-row min-h-[calc(100vh-100px)] gap-2">
+    <div className="md:flex sm:flex min-h-[calc(100vh-100px)] gap-2">
       <aside className="w-full  max-[520px]:hidden min-h-full text-center shadow shadow-blue-100 max-w-60">
         <div className="flex items-center justify-center h-32 ">
           <div className="relative flex items-center justify-center rounded-full">
@@ -47,7 +56,7 @@ const AdminPanel = () => {
           </nav>
         </div>
       </aside>
-      <aside className="w-full shadow md:hidden ">
+      <aside className="w-full shadow sm:hidden md:hidden ">
         <div className="flex items-center justify-between w-full p-4">
           <div className="rounded-full ">
             {user?.data?.profilePicture ? (

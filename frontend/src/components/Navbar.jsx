@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Api from "../api/Api";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../redux/slice/userSlice";
+import Role from "../utils/Role";
 function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user);
-  console.log(user);
 
   const handleLogout = async () => {
     const logoutData = await fetch(Api.logout.url, {
@@ -27,53 +27,57 @@ function Navbar() {
   };
 
   return (
-    <nav className="shadow-lg max-[520px]:flex md:navbar bg-base-100">
+    <nav className="shadow-lg max-[520px]:navbar max-[620px]:navbar flex lg:navbar bg-base-100">
       <div className="navbar navbar-start">
         <h1>ECOM-Store</h1>
       </div>
-      <div className="block md:flex max-[520px]:hidden navbar-center input input-bordered">
+      <div className="flex  max-[769px]:hidden  max-[620px]:hidden  max-[520px]:hidden navbar-center input input-bordered">
         <input type="text" className="" placeholder="Search" />
         <span>
           <IoIosSearch />
         </span>
       </div>
       <div className="flex gap-2 p-2 md:navbar-end md:text-xl">
-        <div>
-          <div className=" dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="">
-                {user?.data?.profilePicture ? (
-                  <img
-                    src={user?.data?.profilePicture}
-                    alt=""
-                    className="w-10 h-10 rounded-full Tailwind CSS Navbar component"
-                  />
-                ) : (
-                  <FaRegUser />
-                )}
+        {user && (
+          <div>
+            <div className=" dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="">
+                  {user?.data?.profilePicture ? (
+                    <img
+                      src={user?.data?.profilePicture}
+                      alt=""
+                      className="w-10 h-10 rounded-full Tailwind CSS Navbar component"
+                    />
+                  ) : (
+                    <FaRegUser />
+                  )}
+                </div>
               </div>
+              {user?.data?.role === Role.ADMIN && (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <a className="justify-between">
+                      <Link to="/admin">Admin Panel</Link>
+                    </a>
+                  </li>
+                </ul>
+              )}
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  <Link to="/admin">Admin Panel</Link>
-                </a>
-              </li>
-            </ul>
           </div>
-        </div>
+        )}
 
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">
             <FaCartShopping />
-            <span className="badge badge-sm indicator-item">8</span>
+            <span className="badge badge-sm indicator-item">0</span>
           </div>
         </div>
         <div>
