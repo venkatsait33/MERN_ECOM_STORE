@@ -99,7 +99,7 @@ const AdminPanel = () => {
           </div>
         </div>
       </aside>
-      <main>
+      <main className="w-full p-2">
         <Outlet />
       </main>
     </div>
