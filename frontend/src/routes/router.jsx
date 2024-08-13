@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import App from "../App";
-import Login from "../pages/Login";
-import SignUp from "../pages/SignUp";
-import ForgotPassword from "../pages/ForgotPassword";
-import AdminPanel from "../components/AdminPanel";
-import AllUsers from "../pages/AllUsers";
-import AllProducts from "../pages/AllProducts";
+import Login from "../pages/user/Login";
+import SignUp from "../pages/user/SignUp";
+import ForgotPassword from "../pages/user/ForgotPassword";
+import AdminPanel from "../pages/AdminPanel";
+import AllUsers from "../pages/user/AllUsers";
+import AllProducts from "../pages/product/AllProducts";
 
 const router = createBrowserRouter([
   {

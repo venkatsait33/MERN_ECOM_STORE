@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import UploadProduct from "../components/UploadProduct";
-import Api from "../api/Api";
-import AdminProductCard from "../components/product/AdminProductCard";
+import UploadProduct from "../../pages/product/UploadProduct";
+import Api from "../../api/Api";
+import AdminProductCard from "../../pages/product/AdminProductCard";
 
 const AllProducts = () => {
   const [showProductUpload, setShowProductUpload] = useState(false);
@@ -44,11 +44,11 @@ const AllProducts = () => {
       </div>
 
       {/*Product List */}
-      <div className="flex items-center py-4 overflow-y-scroll">
+      <div className="flex items-center gap-2 p-4 overflow-y-scroll">
         {selectedProduct ? (
           <div
             key={selectedProduct._id}
-            className="w-full gap-2 p-2 shadow-xl card card-compact bg-base-100"
+            className="w-full gap-2 p-2 shadow-xl  card card-compact bg-base-100"
           >
             <AdminProductCard
               data={selectedProduct}

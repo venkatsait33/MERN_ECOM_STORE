@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
-import loginGif from "../assest/signin.gif";
-import ImageToBase64 from "../helpers/ImageToBase64";
-import Api from "../api/Api";
+import loginGif from "../../asset/signin.gif";
+import ImageToBase64 from "../../helpers/ImageToBase64";
+import Api from "../../api/Api";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

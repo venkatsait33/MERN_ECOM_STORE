@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import loginGif from "../assest/signin.gif";
+import loginGif from "../../asset/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useContext, useState } from "react";
-import Api from "../api/Api";
+import Api from "../../api/Api";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);

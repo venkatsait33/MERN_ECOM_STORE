@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Api from "../api/Api";
+import Api from "../../api/Api";
 import moment from "moment";
 import { FaRegEdit } from "react-icons/fa";
-import ChangeUserRole from "../components/ChangeUserRole";
+import ChangeUserRole from "../../components/ChangeUserRole";
 
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);

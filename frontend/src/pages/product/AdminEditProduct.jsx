@@ -1,31 +1,31 @@
 import { useState } from "react";
-import ProductCategory from "./ProductCategorys";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import UploadImage from "../helpers/UploadImage";
 import { CgClose } from "react-icons/cg";
 import { MdDelete } from "react-icons/md";
-import InputForm from "./InputForm";
-import Api from "../api/Api";
 import { toast } from "react-toastify";
+import Api from "../../api/Api";
+import ProductCategory from "../../components/ProductCategorys";
+import InputForm from "../../components/InputForm";
+import UploadImage from "../../helpers/UploadImage";
 
-const UploadProduct = ({ onClose }) => {
+const AdminEditProduct = ({ onClose, product, fetchData }) => {
   const [data, setData] = useState({
-    productName: "",
-    brandName: "",
-    category: "",
-    productImage: [],
-    price: "",
-    description: "",
-    sellingPrice: "",
+    ...product,
+    productName: product?.productName,
+    brandName: product?.brandName,
+    category: product?.category,
+    productImage: product?.productImage || [],
+    price: product?.price,
+    description: product?.description,
+    sellingPrice: product?.sellingPrice,
   });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setData({ ...data, [name]: value });
   };
+
+  console.log(data);
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -50,8 +50,8 @@ const UploadProduct = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const responseData = await fetch(Api.upload_product.url, {
-      method: Api.upload_product.method,
+    const responseData = await fetch(Api.update_product.url, {
+      method: Api.update_product.method,
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -64,17 +64,17 @@ const UploadProduct = ({ onClose }) => {
     if (apiData.success) {
       toast.success(apiData?.message);
       onClose();
+      fetchData();
     }
     if (apiData.error) {
       toast.error(apiData?.message);
     }
   };
-
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full rounded ">
-      <div className=" p-4 bg-base-200 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
+    <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full ">
+      <div className="bg-base-200 p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
         <div className="flex items-center justify-between pb-3">
-          <h2 className="text-lg font-bold">Upload Product</h2>
+          <h2 className="text-lg font-bold">Edit Product</h2>
           <div
             className="btn btn-sm btn-circle btn-secondary"
             onClick={onClose}
@@ -199,11 +199,11 @@ const UploadProduct = ({ onClose }) => {
             value={data.description}
           ></textarea>
 
-          <button className="mb-10 btn btn-primary ">Upload Product</button>
+          <button className="mb-10 btn btn-primary ">Edit Product</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default UploadProduct;
+export default AdminEditProduct;
