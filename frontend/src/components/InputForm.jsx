@@ -11,6 +11,7 @@ const InputForm = ({ label, type, placeholder, value, onChange, name }) => {
         onChange={onChange}
         name={name}
         className="w-full max-w-xs input input-bordered"
+        required
       />
     </div>
   );

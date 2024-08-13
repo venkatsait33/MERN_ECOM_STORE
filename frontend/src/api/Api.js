@@ -25,6 +25,18 @@ const Api = {
     url: `${backendDomainURL}/api/update-user`,
     method: "post",
   },
+  upload_product: {
+    url: `${backendDomainURL}/api/upload-product`,
+    method: "post",
+  },
+  products: {
+    url: `${backendDomainURL}/api/all-products`,
+    method: "get",
+  },
+  update_product: {
+    url: `${backendDomainURL}/api/update-product`,
+    method: "post",
+  },
 };
 
 export default Api;
