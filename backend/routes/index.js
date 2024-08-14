@@ -11,6 +11,8 @@ const updateUserRole = require("../controller/user/updateUser");
 const uploadProductController = require("../controller/product/uploadProduct");
 const getProductsController = require("../controller/product/getProducts");
 const updateProductController = require("../controller/product/updateProduct");
+const categoryProductsController = require("../controller/product/getCategoryProducts");
+const selectedCategoryProducts = require("../controller/product/selectedCategoryProducts");
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -26,5 +28,7 @@ router.post("/update-user", authToken, updateUserRole);
 router.post("/upload-product", authToken, uploadProductController);
 router.get("/all-products", getProductsController);
 router.post("/update-product", authToken, updateProductController);
+router.get("/get-category", categoryProductsController);
+router.post("/category-product", selectedCategoryProducts);
 
 module.exports = router;

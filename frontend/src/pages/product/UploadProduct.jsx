@@ -8,7 +8,7 @@ import InputForm from "../../components/InputForm";
 import Api from "../../api/Api";
 import { toast } from "react-toastify";
 
-const UploadProduct = ({ onClose }) => {
+const UploadProduct = ({ onClose, fetchData }) => {
   const [data, setData] = useState({
     productName: "",
     brandName: "",
@@ -64,6 +64,7 @@ const UploadProduct = ({ onClose }) => {
     if (apiData.success) {
       toast.success(apiData?.message);
       onClose();
+      fetchData()
     }
     if (apiData.error) {
       toast.error(apiData?.message);

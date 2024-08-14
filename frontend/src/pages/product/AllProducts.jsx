@@ -44,12 +44,9 @@ const AllProducts = () => {
       </div>
 
       {/*Product List */}
-      <div className="flex items-center gap-2 p-4 overflow-y-scroll">
+      <div className="flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-150px)] overflow-y-scroll justify-evenly">
         {selectedProduct ? (
-          <div
-            key={selectedProduct._id}
-            className="w-full gap-2 p-2 shadow-xl  card card-compact bg-base-100"
-          >
+          <div key={selectedProduct._id}>
             <AdminProductCard
               data={selectedProduct}
               onEdit={handleEditProduct}
@@ -59,10 +56,7 @@ const AllProducts = () => {
           </div>
         ) : (
           allProducts?.map((product) => (
-            <div
-              key={product._id}
-              className="w-full gap-2 p-2 shadow-xl card card-compact bg-base-100"
-            >
+            <div key={product._id}>
               <AdminProductCard
                 data={product}
                 onEdit={handleEditProduct}
@@ -75,7 +69,10 @@ const AllProducts = () => {
       {/*upload Product */}
       <div>
         {showProductUpload && (
-          <UploadProduct onClose={() => setShowProductUpload(false)} />
+          <UploadProduct
+            onClose={() => setShowProductUpload(false)}
+            fetchData={fetchProducts}
+          />
         )}
       </div>
     </div>

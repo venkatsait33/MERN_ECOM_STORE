@@ -7,6 +7,7 @@ import ForgotPassword from "../pages/user/ForgotPassword";
 import AdminPanel from "../pages/AdminPanel";
 import AllUsers from "../pages/user/AllUsers";
 import AllProducts from "../pages/product/AllProducts";
+import ProductCategoryList from "../components/category/ProductCategoryList";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "", element: <Home /> },
+      {path:"product-category/:categoryName", element:<ProductCategoryList/>},
       {
         path: "admin",
         element: <AdminPanel />,

@@ -37,6 +37,14 @@ const Api = {
     url: `${backendDomainURL}/api/update-product`,
     method: "post",
   },
+  product_category: {
+    url: `${backendDomainURL}/api/get-category`,
+    method: "get",
+  },
+  category_wise_products: {
+    url: `${backendDomainURL}/api/category-product`,
+    method: "post",
+  },
 };
 
 export default Api;

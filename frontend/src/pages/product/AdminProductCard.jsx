@@ -10,25 +10,28 @@ const AdminProductCard = ({ data, onEdit, onClose, fetchData }) => {
     onEdit(data); // Notify the parent about the product being edited
   };
   return (
-    <div className="rounded ">
-      <div className="">
-        <img
-          src={data?.productImage}
-          alt=""
-          width={120}
-          height={120}
-          className="mx-auto w-fit"
-        />
-        <h1 className="flex items-center justify-between m-2">
-          {data?.productName}{" "}
-          <span
-            className="bg-green-600 rounded-full cursor-pointer w-fit btn btn-sm btn-outline"
-            onClick={handleEditClick}
-          >
-            <MdModeEditOutline />
-          </span>
-        </h1>
-        <p className=" text-primary">{DisplayCurrency(data?.sellingPrice)}</p>
+    <div className="shadow-xl card card-compact bg-base-100">
+      <div className="w-40 ">
+        <div className="flex items-center justify-center w-32 h-32">
+          <img
+            src={data?.productImage[0]}
+            alt=""
+            className="object-fill h-full mx-auto"
+          />
+        </div>
+        <h1 className=" text-ellipsis line-clamp-2">{data?.productName} </h1>
+        <div className="flex items-center justify-between m-2">
+          <p className=" text-primary">{DisplayCurrency(data?.sellingPrice)}</p>
+          <p>
+            {" "}
+            <span
+              className="bg-green-600 rounded-full cursor-pointer w-fit btn btn-sm btn-outline"
+              onClick={handleEditClick}
+            >
+              <MdModeEditOutline />
+            </span>
+          </p>
+        </div>
       </div>
       <div>
         {editProduct && (
