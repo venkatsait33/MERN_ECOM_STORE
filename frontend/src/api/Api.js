@@ -45,6 +45,10 @@ const Api = {
     url: `${backendDomainURL}/api/category-product`,
     method: "post",
   },
+  product_details: {
+    url: `${backendDomainURL}/api/product-details`,
+    method: "post",
+  },
 };
 
 export default Api;

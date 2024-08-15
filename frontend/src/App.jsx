@@ -18,7 +18,6 @@ const App = () => {
     });
 
     const apiData = await responseData.json();
-    
 
     if (apiData.success) {
       dispatch(setUserDetails(apiData));
@@ -33,11 +32,13 @@ const App = () => {
     <>
       <UserContext.Provider value={{ fetchUserDetails }}>
         <ToastContainer position="top-center" />
-        <Navbar />
-        <main className="min-h-[calc(100vh-120px)]">
-          <Outlet />
-        </main>
-        <Footer />
+        <div className="container mx-auto">
+          <Navbar />
+          <main className="min-h-[calc(100vh-120px)]">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
       </UserContext.Provider>
     </>
   );

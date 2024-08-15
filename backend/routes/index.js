@@ -13,6 +13,7 @@ const getProductsController = require("../controller/product/getProducts");
 const updateProductController = require("../controller/product/updateProduct");
 const categoryProductsController = require("../controller/product/getCategoryProducts");
 const selectedCategoryProducts = require("../controller/product/selectedCategoryProducts");
+const getProductDetailsController = require("../controller/product/getProductDetails");
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -30,5 +31,6 @@ router.get("/all-products", getProductsController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-category", categoryProductsController);
 router.post("/category-product", selectedCategoryProducts);
+router.post("/product-details", getProductDetailsController);
 
 module.exports = router;

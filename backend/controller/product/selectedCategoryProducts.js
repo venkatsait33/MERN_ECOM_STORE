@@ -1,3 +1,5 @@
+const productModel = require("../../models/productModel");
+
 async function selectedCategoryProducts(req, res) {
   try {
     const { category } = req?.body || req?.query;

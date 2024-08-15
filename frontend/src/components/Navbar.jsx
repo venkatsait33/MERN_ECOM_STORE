@@ -37,7 +37,7 @@ function Navbar() {
           <IoIosSearch />
         </span>
       </div>
-      <div className="flex gap-2 p-2 md:navbar-end md:text-xl">
+      <div className="flex gap-2 p-2 navbar-end md:text-xl">
         {user && (
           <div>
             <div className=" dropdown dropdown-end">
