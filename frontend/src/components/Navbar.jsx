@@ -6,9 +6,12 @@ import Api from "../api/Api";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../redux/slice/userSlice";
 import Role from "../utils/Role";
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user);
+  const context = useContext(UserContext);
 
   const handleLogout = async () => {
     const logoutData = await fetch(Api.logout.url, {
@@ -29,7 +32,7 @@ function Navbar() {
   return (
     <nav className="shadow-lg max-[520px]:navbar max-[620px]:navbar flex lg:navbar bg-base-100">
       <div className="navbar navbar-start">
-        <h1>ECOM-Store</h1>
+        <Link to={"/"}>ECOM-Store</Link>
       </div>
       <div className="flex  max-[769px]:hidden  max-[620px]:hidden  max-[520px]:hidden navbar-center input input-bordered">
         <input type="text" className="" placeholder="Search" />
@@ -74,12 +77,17 @@ function Navbar() {
           </div>
         )}
 
-        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <FaCartShopping />
-            <span className="badge badge-sm indicator-item">0</span>
-          </div>
-        </div>
+        {user && (
+          <Link to='cart' tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+            <div className="indicator">
+              <FaCartShopping className="text-lg" />
+              <span className="badge badge-primary badge-sm indicator-item">
+                {context?.cartProductCount}
+              </span>
+            </div>
+          </Link>
+        )}
+
         <div>
           {user?.data?._id ? (
             <div>

@@ -14,8 +14,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { fetchUserDetails } = useContext(UserContext);
-  console.log(fetchUserDetails());
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(UserContext);
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -37,6 +36,7 @@ const Login = () => {
       toast.success("user successfully signed in");
       navigate("/");
       fetchUserDetails();
+      fetchUserAddToCart();
     }
 
     if (apiData.error) {

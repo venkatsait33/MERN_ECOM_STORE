@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import BannerProduct from "../components/BannerProduct";
 import HorizontalProductCard from "../components/cards/HorizontalProductCard";
 import VerticalProductCard from "../components/cards/VerticalProductCard";
@@ -6,6 +7,7 @@ import CategoryList from "../components/category/CategoryList";
 function Home() {
   return (
     <div className="container mx-auto">
+      <ToastContainer position="top-center" />
       <CategoryList />
       <BannerProduct />
       <HorizontalProductCard

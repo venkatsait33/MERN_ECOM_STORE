@@ -49,6 +49,26 @@ const Api = {
     url: `${backendDomainURL}/api/product-details`,
     method: "post",
   },
+  addToCartProduct: {
+    url: `${backendDomainURL}/api/add-to-cart`,
+    method: "post",
+  },
+  countOfCartProducts: {
+    url: `${backendDomainURL}/api/countAddedToCartProduct`,
+    method: "get",
+  },
+  viewCartProducts: {
+    url: `${backendDomainURL}/api/view-cart-product`,
+    method: "get",
+  },
+  updateCart: {
+    url: `${backendDomainURL}/api/update-cart`,
+    method: "post",
+  },
+  deleteCart: {
+    url: `${backendDomainURL}/api/delete-cart`,
+    method: "post",
+  },
 };
 
 export default Api;

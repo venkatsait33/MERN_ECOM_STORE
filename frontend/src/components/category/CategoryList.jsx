@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const CategoryList = () => {
   const [productCategory, setProductCategory] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const categoryLoading = new Array(11).fill(null);
 
   const getProducts = async () => {

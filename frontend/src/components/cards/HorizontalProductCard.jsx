@@ -1,12 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FetchCategoryProducts from "../../helpers/FetchCategoryProducts";
 import DisplayCurrency from "../../helpers/DisplayCurrency";
 import { Link } from "react-router-dom";
+import AddToCart from "../../helpers/AddToCart";
+import UserContext from "../../context/UserContext";
 
 const HorizontalProductCard = ({ category, heading }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadingList = new Array(5).fill(null);
+  const { fetchUserAddToCart } = useContext(UserContext);
+  
+  
+    const handleAddToCart = async (e, id) => {
+      await AddToCart(e, id);
+      fetchUserAddToCart();
+    };
 
   const fetchData = async () => {
     setLoading(true);
@@ -28,7 +37,10 @@ const HorizontalProductCard = ({ category, heading }) => {
         {loading
           ? loadingList.map((item, index) => {
               return (
-                <div key={index} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex">
+                <div
+                  key={index}
+                  className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex"
+                >
                   <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] animate-pulse"></div>
                   <div className="grid w-full gap-2 p-4">
                     <h2 className="p-1 text-base font-medium text-black rounded-full md:text-lg text-ellipsis line-clamp-1 bg-slate-200 animate-pulse"></h2>
@@ -71,8 +83,11 @@ const HorizontalProductCard = ({ category, heading }) => {
                     </div>
 
                     <div className="justify-end card-actions">
-                      <button className="btn btn-secondary btn-sm">
-                        Buy Now
+                      <button
+                        className="btn btn-secondary btn-sm"
+                        onClick={(e) => handleAddToCart(e, product._id)}
+                      >
+                        Add to Cart
                       </button>
                     </div>
                   </div>

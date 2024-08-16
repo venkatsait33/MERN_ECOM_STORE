@@ -9,6 +9,7 @@ import AllUsers from "../pages/user/AllUsers";
 import AllProducts from "../pages/product/AllProducts";
 import ProductCategoryList from "../components/category/ProductCategoryList";
 import ProductDetails from "../pages/product/ProductDetails";
+import Cart from "../pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <ProductDetails />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
       {
         path: "admin",

@@ -205,11 +205,12 @@ const ProductDetails = () => {
         </div>
       </div>
 
-   
+      {details?.category && (
         <HorizontalProductCard
           category={details?.category}
           heading={"Recommended Products"}
         />
+      )}
     </div>
   );
 };

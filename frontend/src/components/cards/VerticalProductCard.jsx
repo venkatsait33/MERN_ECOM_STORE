@@ -1,11 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FetchCategoryProducts from "../../helpers/FetchCategoryProducts";
 import DisplayCurrency from "../../helpers/DisplayCurrency";
 import { Link } from "react-router-dom";
+import AddToCart from "../../helpers/AddToCart";
+import UserContext from "../../context/UserContext";
 const VerticalProductCard = ({ category, heading }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadingList = new Array(11).fill(null);
+  const { fetchUserAddToCart } = useContext(UserContext);
+  
+   const handleAddToCart = async (e, id) => {
+     await AddToCart(e, id);
+     fetchUserAddToCart();
+   };
+
 
   const fetchData = async () => {
     setLoading(true);
@@ -14,7 +23,7 @@ const VerticalProductCard = ({ category, heading }) => {
     setLoading(false);
   };
 
-  console.log(data);
+  
 
   useEffect(() => {
     fetchData();
@@ -52,7 +61,12 @@ const VerticalProductCard = ({ category, heading }) => {
                 </div>
 
                 <div className="justify-end card-actions">
-                  <button className="btn btn-secondary btn-sm">Buy Now</button>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={(e) => handleAddToCart(e, product._id)}
+                  >
+                    Add To Cart
+                  </button>
                 </div>
               </div>
             </Link>
