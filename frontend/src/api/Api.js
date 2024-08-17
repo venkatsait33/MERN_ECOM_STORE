@@ -69,6 +69,14 @@ const Api = {
     url: `${backendDomainURL}/api/delete-cart`,
     method: "post",
   },
+  searchProduct: {
+    url: `${backendDomainURL}/api/search`,
+    method: "get",
+  },
+  filterProducts: {
+    url: `${backendDomainURL}/api/filter-products`,
+    method: "post",
+  },
 };
 
 export default Api;

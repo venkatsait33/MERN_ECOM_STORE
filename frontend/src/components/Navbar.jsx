@@ -1,17 +1,22 @@
 import { IoIosSearch } from "react-icons/io";
 import { FaCartShopping, FaRegUser } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Api from "../api/Api";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../redux/slice/userSlice";
 import Role from "../utils/Role";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user);
   const context = useContext(UserContext);
+  const navigate = useNavigate();
+  const searchInputs = useLocation();
+  const urlSearch = new URLSearchParams(searchInputs.search);
+  const searchQuery = urlSearch.getAll("q");
+  const [search, setSearch] = useState(searchQuery);
 
   const handleLogout = async () => {
     const logoutData = await fetch(Api.logout.url, {
@@ -23,24 +28,41 @@ function Navbar() {
     if (data.success) {
       toast.success(data.message);
       dispatch(setUserDetails(null));
+      navigate("/");
     }
     if (data.error) {
       toast.error(data.message);
     }
   };
 
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearch(value);
+    if (value) {
+      navigate(`/search?q=${value}`);
+    } else {
+      navigate(`/search`);
+    }
+  };
+
   return (
-    <nav className="shadow-lg max-[520px]:navbar max-[620px]:navbar flex lg:navbar bg-base-100">
+    <nav className="shadow-lg max-[520px]:navbar max-[620px]:navbar flex lg:navbar bg-base-100  items-center">
       <div className="navbar navbar-start">
         <Link to={"/"}>ECOM-Store</Link>
       </div>
-      <div className="flex  max-[769px]:hidden  max-[620px]:hidden  max-[520px]:hidden navbar-center input input-bordered">
-        <input type="text" className="" placeholder="Search" />
-        <span>
+      <div className="flex  max-[769px]:hidden  max-[620px]:hidden  max-[520px]:hidden navbar-center w-[50%] justify-between items-center input input-bordered">
+        <input
+          type="text"
+          className="w-full "
+          placeholder="Search"
+          onChange={handleSearch}
+          value={search}
+        />
+        <span className="p-2 text-white rounded-full cursor-pointer bg-primary">
           <IoIosSearch />
         </span>
       </div>
-      <div className="flex gap-2 p-2 navbar-end md:text-xl">
+      <div className="flex items-center gap-2 p-2 navbar-end md:text-xl">
         {user && (
           <div>
             <div className=" dropdown dropdown-end">
@@ -78,7 +100,12 @@ function Navbar() {
         )}
 
         {user && (
-          <Link to='cart' tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <Link
+            to="cart"
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle"
+          >
             <div className="indicator">
               <FaCartShopping className="text-lg" />
               <span className="badge badge-primary badge-sm indicator-item">

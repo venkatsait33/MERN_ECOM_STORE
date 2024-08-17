@@ -3,6 +3,7 @@ import Api from "../api/Api";
 import UserContext from "../context/UserContext";
 import DisplayCurrency from "../helpers/DisplayCurrency";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -11,13 +12,13 @@ const Cart = () => {
   const loadingData = new Array(context.cartProductCount).fill(null);
 
   const fetchData = async () => {
-    setLoading(true);
+    // setLoading(true);
     const responseData = await fetch(Api.viewCartProducts.url, {
       method: Api.viewCartProducts.method,
       credentials: "include",
     });
     const response = await responseData.json();
-    setLoading(false);
+    //setLoading(false);
     setData(response.data);
   };
 
@@ -34,7 +35,6 @@ const Cart = () => {
     if (productResponse.success) {
       fetchData();
     }
-    console.log(productResponse);
   };
   const handleDecrement = async (id, qty) => {
     if (qty >= 2) {
@@ -50,7 +50,6 @@ const Cart = () => {
       if (productResponse.success) {
         fetchData();
       }
-      console.log(productResponse);
     }
   };
 
@@ -68,11 +67,15 @@ const Cart = () => {
       fetchData();
       context.fetchUserAddToCart();
     }
-    console.log(responseData);
+  };
+  const handleLoading = async () => {
+    await fetchData();
   };
 
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    handleLoading();
+    setLoading(false);
   }, []);
 
   console.log(data);
@@ -96,7 +99,7 @@ const Cart = () => {
             ? loadingData.map((item, index) => {
                 return (
                   <div
-                    key={index}
+                    key={item + index}
                     className="w-full h-32 my-1 border rounded border-slate-200 skeleton"
                   ></div>
                 );
@@ -104,24 +107,27 @@ const Cart = () => {
             : data?.map((item, index) => {
                 return (
                   <div
-                    key={index}
                     className="w-full my-1 border rounded border-slate-200 "
+                    key={index}
                   >
-                    <div className="flex items-center gap-2 ">
+                    <div className="flex items-center gap-3 ">
                       <div className="flex items-center justify-center h-full">
                         <img
-                          src={item?.productId.productImage[0]}
-                          alt={item?.productId.productName}
+                          src={item?.productId?.productImage[0]}
+                          alt={item?.productId?.productName}
                           className="object-scale-down w-36 h-36 bg-base-300"
                         />
                       </div>
                       <div className="flex items-center justify-between w-full">
                         <div className="flex flex-col gap-1">
-                          <h1 className="text-xl text-ellipsis line-clamp-3">
-                            {item?.productId.productName}
-                          </h1>
+                          <Link to={"/product/" + item?.productId?._id}>
+                            <h1 className="text-xl text-ellipsis line-clamp-3">
+                              {item?.productId?.productName}
+                            </h1>
+                          </Link>
+
                           <h1 className="text-sm">
-                            {item?.productId.category}
+                            {item?.productId?.category}
                           </h1>
                           <div className="flex items-center gap-2 p-1">
                             <button
@@ -154,16 +160,16 @@ const Cart = () => {
                           </div>
                           <div className="flex items-center gap-3 p-1 sm:flex-col">
                             <h2 className="md:text-lg text-secondary">
-                              {DisplayCurrency(item?.productId.sellingPrice)}
+                              {DisplayCurrency(item?.productId?.sellingPrice)}
                             </h2>
                             <h2 className="text-sm line-through">
-                              {DisplayCurrency(item?.productId.price)}
+                              {DisplayCurrency(item?.productId?.price)}
                             </h2>
                           </div>
                           <div className="btn btn-outline btn-sm md:btn-md">
                             TotalPrice:&nbsp;
                             {DisplayCurrency(
-                              item?.productId.sellingPrice * item?.quantity
+                              item?.productId?.sellingPrice * item?.quantity
                             )}
                           </div>
                         </div>
@@ -173,12 +179,12 @@ const Cart = () => {
                 );
               })}
         </div>
-        <div className=" max-[520px]:w-full lg:w-full xl:w-[33%] h-40 mt-5 lg:mt-0 bg-base-200 border border-slate-200 rounded ">
+        <div className=" max-[520px]:w-full lg:w-full xl:w-[33%]  h-44 mt-5 lg:mt-0 bg-base-200 border border-slate-200 rounded ">
           {loading ? (
             <div>total</div>
           ) : (
             <div className="flex flex-col items-center h-36">
-              <div className="flex flex-col justify-between w-full gap-3 max-[520px]:p-4 p-2" >
+              <div className="flex flex-col justify-between w-full gap-3 max-[520px]:p-4 p-2">
                 <h2 className="w-full text-xl text-center uppercase bg-primary">
                   Summary
                 </h2>
@@ -191,6 +197,9 @@ const Cart = () => {
                   <p>Total Price:</p>
                   <h2>{DisplayCurrency(totalPrice)}</h2>
                 </div>
+                <button className="w-full btn btn-outline btn-primary">
+                  Payment
+                </button>
               </div>
             </div>
           )}

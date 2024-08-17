@@ -35,7 +35,7 @@ const VerticalProductCard = ({ category, heading }) => {
         {data?.map((product, index) => {
           return (
             <Link
-              to={"product/" + product?._id}
+              to={"/product/" + product?._id}
               key={index}
               className="w-64 rounded shadow-xl cursor-pointer card card-compact bg-slate-200"
             >

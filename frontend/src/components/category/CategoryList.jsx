@@ -39,7 +39,7 @@ const CategoryList = () => {
               return (
                 <div key={index} className="cursor-pointer ">
                   <Link
-                    to={"product-category/" + product?.category}
+                    to={"product-category?category=" + product?.category}
                     className="flex items-center justify-center w-20 h-20 p-2 overflow-hidden btn btn-circle bg-slate-200"
                   >
                     <img

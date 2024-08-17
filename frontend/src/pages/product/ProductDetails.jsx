@@ -1,15 +1,18 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Api from "../../api/Api";
 import DisplayCurrency from "../../helpers/DisplayCurrency";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import VerticalProductCard from "../../components/cards/VerticalProductCard";
 import HorizontalProductCard from "../../components/cards/HorizontalProductCard";
+import AddToCart from "../../helpers/AddToCart";
+import UserContext from "../../context/UserContext";
 
 const ProductDetails = () => {
   const paramsId = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const productImageList = new Array(4).fill(null);
+  const { fetchUserAddToCart } = useContext(UserContext);
   const [details, setDetails] = useState({
     productName: "",
     brandName: "",
@@ -27,7 +30,6 @@ const ProductDetails = () => {
     y: 0,
   });
   const [zoomImage, setZoomImage] = useState(false);
-  console.log(zoomImageCoordinate);
 
   const fetchData = async () => {
     setLoading(true);
@@ -49,7 +51,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [paramsId]);
 
   const handleMouseEnterProduct = (imageUrl) => {
     setActiveImage(imageUrl);
@@ -74,6 +76,16 @@ const ProductDetails = () => {
 
   const handleLeaveImageZoom = () => {
     setZoomImage(false);
+  };
+
+  const handleAddToCart = async (e, id) => {
+    await AddToCart(e, id);
+    fetchUserAddToCart();
+  };
+  const handleBuyProduct = async (e, id) => {
+    await AddToCart(e, id);
+    fetchUserAddToCart();
+    navigate("/cart");
   };
 
   return (
@@ -183,22 +195,28 @@ const ProductDetails = () => {
                     {DisplayCurrency(details?.sellingPrice)}
                   </h1>
                   <h1 className="text-sm text-gray-500 line-through">
-                    {DisplayCurrency(details.price)}
+                    {DisplayCurrency(details?.price)}
                   </h1>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button className="btn btn-sm md:btn-md btn-primary min-w-[120px]">
-                    Buy
-                  </button>
-                  <button className="btn btn-sm md:btn-md btn-secondary min-w-[120px]">
-                    Add To Cart
-                  </button>
-                </div>
 
-                <p className="flex flex-col">
+                <p className="flex flex-col text-sm text-pretty">
                   Description:
                   <span>{details?.description}</span>
                 </p>
+                <div className="flex items-center gap-2">
+                  <button
+                    className="btn btn-sm md:btn-md btn-primary min-w-[120px]"
+                    onClick={(e) => handleBuyProduct(e, details?._id)}
+                  >
+                    Buy
+                  </button>
+                  <button
+                    className="btn btn-sm md:btn-md btn-secondary min-w-[120px]"
+                    onClick={(e) => handleAddToCart(e, details?._id)}
+                  >
+                    Add To Cart
+                  </button>
+                </div>
               </div>
             )}
           </div>

@@ -10,12 +10,11 @@ const HorizontalProductCard = ({ category, heading }) => {
   const [loading, setLoading] = useState(false);
   const loadingList = new Array(5).fill(null);
   const { fetchUserAddToCart } = useContext(UserContext);
-  
-  
-    const handleAddToCart = async (e, id) => {
-      await AddToCart(e, id);
-      fetchUserAddToCart();
-    };
+
+  const handleAddToCart = async (e, id) => {
+    await AddToCart(e, id);
+    fetchUserAddToCart();
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -57,7 +56,7 @@ const HorizontalProductCard = ({ category, heading }) => {
           : data?.map((product, index) => {
               return (
                 <Link
-                  to={"product/" + product?._id}
+                  to={"/product/" + product?._id}
                   key={index}
                   className="w-64 rounded shadow-xl cursor-pointer card card-compact bg-slate-200"
                 >
