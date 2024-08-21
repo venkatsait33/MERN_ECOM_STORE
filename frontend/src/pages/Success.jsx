@@ -9,7 +9,7 @@ const Success = () => {
           Your order has been placed successfully
         </h1>
         <div className="flex items-center w-full p-2 justify-evenly">
-          <Link to='orders' className="btn btn-outline btn-success">Orders</Link>
+          <Link to='/orders' className="btn btn-outline btn-success">Orders</Link>
           <Link to='/' className="btn btn-primary btn-outline">Home</Link>
         </div>
       </div>

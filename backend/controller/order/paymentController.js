@@ -27,7 +27,7 @@ async function paymentController(req, res) {
             currency: "inr",
             product_data: {
               name: item.productId.productName,
-              image: item.productId.images,
+              images: item.productId.productImage,
               metadata: {
                 productId: item.productId._id,
               },

@@ -81,6 +81,10 @@ const Api = {
     url: `${backendDomainURL}/api/checkout`,
     method: "post",
   },
+  orderList: {
+    url: `${backendDomainURL}/api/order-list`,
+    method: "get",
+  },
 };
 
 export default Api;

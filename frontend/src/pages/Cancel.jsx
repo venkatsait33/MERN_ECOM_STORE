@@ -19,7 +19,7 @@ const Cancel = () => {
           Go To Cart
         </Link>
         <div className="flex items-center w-full p-2 justify-evenly">
-          <Link to="orders" className="btn btn-outline btn-success">
+          <Link to="/orders" className="btn btn-outline btn-success">
             Orders
           </Link>
           <Link to="/" className="btn btn-primary btn-outline">
