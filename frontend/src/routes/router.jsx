@@ -11,6 +11,9 @@ import ProductCategoryList from "../components/category/ProductCategoryList";
 import ProductDetails from "../pages/product/ProductDetails";
 import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
+import Success from "../pages/Success";
+import Cancel from "../pages/Cancel";
+import Orders from "../pages/Orders";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,18 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "cancel",
+        element: <Cancel />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
       {
         path: "search",

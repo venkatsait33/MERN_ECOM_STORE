@@ -31,7 +31,7 @@ const VerticalProductCard = ({ category, heading }) => {
   return (
     <div className="p-2 m-2">
       <h2 className="mb-2 text-xl font-semibold text-accent">{heading}</h2>
-      <div className="flex gap-2 ">
+      <div className="flex gap-2 overflow-hidden overflow-x-scroll scrollbar-hide">
         {data?.map((product, index) => {
           return (
             <Link

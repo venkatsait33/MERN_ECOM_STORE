@@ -4,6 +4,7 @@ import UserContext from "../context/UserContext";
 import DisplayCurrency from "../helpers/DisplayCurrency";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -78,7 +79,6 @@ const Cart = () => {
     setLoading(false);
   }, []);
 
-  console.log(data);
   const totalQty = data.reduce(
     (previousValue, currentValue) => previousValue + currentValue.quantity,
     0
@@ -87,6 +87,27 @@ const Cart = () => {
     (preve, curr) => preve + curr.quantity * curr?.productId?.sellingPrice,
     0
   );
+
+  const handlePayment = async () => {
+    const stripePromise = await loadStripe(
+      import.meta.env.VITE_STRIPE_PUBLIC_KEY
+    );
+    const paymentData = await fetch(Api.payment.url, {
+      method: Api.payment.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItems: data }),
+    });
+    const paymentResponse = await paymentData.json();
+    if (paymentResponse.session.id) {
+      stripePromise.redirectToCheckout({
+        sessionId: paymentResponse.session.id,
+      });
+    }
+    console.log(paymentResponse);
+  };
 
   return (
     <div className="container mx-auto">
@@ -179,31 +200,36 @@ const Cart = () => {
                 );
               })}
         </div>
-        <div className=" max-[520px]:w-full lg:w-full xl:w-[33%]  h-44 mt-5 lg:mt-0 bg-base-200 border border-slate-200 rounded ">
-          {loading ? (
-            <div>total</div>
-          ) : (
-            <div className="flex flex-col items-center h-36">
-              <div className="flex flex-col justify-between w-full gap-3 max-[520px]:p-4 p-2">
-                <h2 className="w-full text-xl text-center uppercase bg-primary">
-                  Summary
-                </h2>
+        {data[0] && (
+          <div className=" max-[520px]:w-full lg:w-full xl:w-[33%]  h-44 mt-5 lg:mt-0 bg-base-200 border border-slate-200 rounded ">
+            {loading ? (
+              <div>total</div>
+            ) : (
+              <div className="flex flex-col items-center h-36">
+                <div className="flex flex-col justify-between w-full gap-3 max-[520px]:p-4 p-2">
+                  <h2 className="w-full text-xl text-center uppercase bg-primary">
+                    Summary
+                  </h2>
 
-                <div className="flex items-center justify-between">
-                  <p>Quantity: </p>
-                  <h2>{totalQty}</h2>
+                  <div className="flex items-center justify-between">
+                    <p>Quantity: </p>
+                    <h2>{totalQty}</h2>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Total Price:</p>
+                    <h2>{DisplayCurrency(totalPrice)}</h2>
+                  </div>
+                  <button
+                    className="w-full btn btn-outline btn-primary"
+                    onClick={handlePayment}
+                  >
+                    Payment
+                  </button>
                 </div>
-                <div className="flex justify-between">
-                  <p>Total Price:</p>
-                  <h2>{DisplayCurrency(totalPrice)}</h2>
-                </div>
-                <button className="w-full btn btn-outline btn-primary">
-                  Payment
-                </button>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
       {/* product Total */}
     </div>

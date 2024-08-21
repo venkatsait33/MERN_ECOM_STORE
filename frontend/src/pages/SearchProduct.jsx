@@ -29,7 +29,7 @@ const SearchProduct = () => {
                   <div className="p-4 text-lg text-center bg-base-300"><p>No Data Found</p></div>
               )
           }
-      <div className="sm:grid sm:grid-cols-2  max-[520px]:flex max-[520px]:flex-col max-[520px]:justify-center max-[520px]:item-center gap-2 p-2 w-100 md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="sm:grid sm:grid-cols-2  max-[520px]:flex max-[520px]:flex-col max-[520px]:justify-center max-[520px]:item-center gap-2 p-2 w-100 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto ">
         {loading ? (
           <div>Loading...</div>
         ) : (

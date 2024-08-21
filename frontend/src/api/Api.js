@@ -77,6 +77,10 @@ const Api = {
     url: `${backendDomainURL}/api/filter-products`,
     method: "post",
   },
+  payment: {
+    url: `${backendDomainURL}/api/checkout`,
+    method: "post",
+  },
 };
 
 export default Api;
