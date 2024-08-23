@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const responseData = await fetch("http://localhost:8080/api/signin", {
+    const responseData = await fetch(Api.signIn.url, {
       method: Api.signIn.method,
       credentials: "include",
       headers: {
