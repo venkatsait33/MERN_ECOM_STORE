@@ -9,9 +9,7 @@ const FetchCategoryProducts = async (category) => {
     body: JSON.stringify({ category: category }),
   });
 
-    const dataResponse = await responseData.json();
-    console.log(dataResponse);
-    
+  const dataResponse = await responseData.json();
 
   return dataResponse;
 };

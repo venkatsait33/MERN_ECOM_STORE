@@ -17,7 +17,6 @@ const CategoryList = () => {
     setLoading(false);
     setProductCategory(data.data);
   };
-  console.log(productCategory);
 
   useEffect(() => {
     getProducts();

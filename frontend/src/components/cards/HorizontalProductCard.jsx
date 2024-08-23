@@ -23,7 +23,6 @@ const HorizontalProductCard = ({ category, heading }) => {
     setLoading(false);
   };
 
-  console.log(data);
 
   useEffect(() => {
     fetchData();
