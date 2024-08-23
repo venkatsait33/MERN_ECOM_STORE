@@ -1,25 +1,24 @@
 const orderModel = require("../../models/orderProductModel");
 
-async function ordersController(req, res) {
+const orderController = async (request, response) => {
   try {
-    const currentUserId = req.userId;
+    const currentUserId = request.userId;
 
-    const orderList = await orderModel.find({ userId: currentUserId });
+    const orderList = await orderModel
+      .find({ userId: currentUserId })
+      .sort({ createdAt: -1 });
 
-    res.json({
+    response.json({
       data: orderList,
+      message: "Order list",
       success: true,
-      message: "Order list fetched successfully",
-      error: false,
     });
   } catch (error) {
-    res.json({
-      error: true,
+    response.status(500).json({
       message: error.message || error,
-      success: false,
-      data: [],
+      error: true,
     });
   }
-}
+};
 
-module.exports = ordersController;
+module.exports = orderController;

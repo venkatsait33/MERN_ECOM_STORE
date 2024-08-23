@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "MERN_ECOM_APP",
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}

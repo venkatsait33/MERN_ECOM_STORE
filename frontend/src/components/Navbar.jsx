@@ -82,8 +82,9 @@ function Navbar() {
                     <FaRegUser />
                   )}
                 </div>
+                <div></div>
               </div>
-              {user?.data?.role === Role.ADMIN && (
+              {user?.data?.role === Role.ADMIN ? (
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
@@ -91,6 +92,20 @@ function Navbar() {
                   <li>
                     <a className="justify-between">
                       <Link to="/admin">Admin Panel</Link>
+                    </a>
+                    <a className="justify-between">
+                      <Link to="/orders">Orders</Link>
+                    </a>
+                  </li>
+                </ul>
+              ) : (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <a className="justify-between">
+                      <Link to="/orders">Orders</Link>
                     </a>
                   </li>
                 </ul>
