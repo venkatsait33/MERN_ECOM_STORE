@@ -85,6 +85,10 @@ const Api = {
     url: `${backendDomainURL}/api/order-list`,
     method: "get",
   },
+  allOrderList: {
+    url: `${backendDomainURL}/api/all-order`,
+    method: "get",
+  },
 };
 
 export default Api;

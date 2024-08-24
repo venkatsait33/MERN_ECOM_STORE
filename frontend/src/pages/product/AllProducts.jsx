@@ -44,7 +44,7 @@ const AllProducts = () => {
       </div>
 
       {/*Product List */}
-      <div className="flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-150px)] overflow-y-scroll justify-evenly">
+      <div className="flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-150px)] overflow-y-scroll scrollbar-hide justify-evenly">
         {selectedProduct ? (
           <div key={selectedProduct._id}>
             <AdminProductCard

@@ -35,9 +35,9 @@ const AllUsers = () => {
 
   return (
     <div className="">
-      <div className="p-2 overflow-x-auto border rounded shadow">
+      <div className="p-2 overflow-x-auto border rounded shadow scrollbar-hide">
         <table className="table table-lg user-table">
-          <thead className="">
+          <thead className="rounded bg-secondary">
             <tr>
               <th>Sr.</th>
               <th>Name</th>

@@ -54,6 +54,11 @@ const AdminPanel = () => {
               All Products
             </Link>
           </nav>
+          <nav>
+            <Link to={"all-orders"} className="link">
+              All Order
+            </Link>
+          </nav>
         </div>
       </aside>
       <aside className="w-full shadow sm:hidden md:hidden ">
@@ -93,6 +98,11 @@ const AdminPanel = () => {
               <nav>
                 <Link to={"all-products"} className="link">
                   All Products
+                </Link>
+              </nav>
+              <nav>
+                <Link to={"all-orders"} className="link">
+                  All Order
                 </Link>
               </nav>
             </div>

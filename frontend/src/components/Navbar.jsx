@@ -91,7 +91,7 @@ function Navbar() {
                 >
                   <li>
                     <a className="justify-between">
-                      <Link to="/admin">Admin Panel</Link>
+                      <Link to="/admin/all-products">Admin Panel</Link>
                     </a>
                     <a className="justify-between">
                       <Link to="/orders">Orders</Link>

@@ -2,7 +2,7 @@ const addToCartModel = require("../../models/cartProductModel");
 
 async function countAddedToCartProduct(req, res) {
   try {
-    const userId  = req.userId;
+    const userId  = req?.userId;
     const count = await addToCartModel.countDocuments({
       userId: userId,
     });
