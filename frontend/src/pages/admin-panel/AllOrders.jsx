@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Api from "../api/Api";
-import DisplayCurrency from "../helpers/DisplayCurrency";
+import Api from "../../api/Api";
+import DisplayCurrency from "../../helpers/DisplayCurrency";
 import moment from "moment";
 
 const AllOrders = () => {

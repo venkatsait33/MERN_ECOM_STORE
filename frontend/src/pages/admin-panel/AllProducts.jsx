@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import UploadProduct from "../../pages/product/UploadProduct";
+import UploadProduct from "./UploadProduct";
 import Api from "../../api/Api";
-import AdminProductCard from "../../pages/product/AdminProductCard";
+import AdminProductCard from "../product/AdminProductCard";
 
 const AllProducts = () => {
   const [showProductUpload, setShowProductUpload] = useState(false);

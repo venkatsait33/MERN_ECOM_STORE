@@ -25,7 +25,6 @@ const AdminEditProduct = ({ onClose, product, fetchData }) => {
     setData({ ...data, [name]: value });
   };
 
-  console.log(data);
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -59,7 +58,6 @@ const AdminEditProduct = ({ onClose, product, fetchData }) => {
       body: JSON.stringify(data),
     });
     const apiData = await responseData.json();
-    console.log(apiData);
 
     if (apiData.success) {
       toast.success(apiData?.message);

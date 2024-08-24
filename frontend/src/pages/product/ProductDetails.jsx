@@ -6,10 +6,14 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import HorizontalProductCard from "../../components/cards/HorizontalProductCard";
 import AddToCart from "../../helpers/AddToCart";
 import UserContext from "../../context/UserContext";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const ProductDetails = () => {
   const paramsId = useParams();
   const navigate = useNavigate();
+    const user = useSelector((state) => state?.user?.user);
+
   const [loading, setLoading] = useState(false);
   const productImageList = new Array(4).fill(null);
   const { fetchUserAddToCart } = useContext(UserContext);
@@ -85,11 +89,16 @@ const ProductDetails = () => {
   const handleBuyProduct = async (e, id) => {
     await AddToCart(e, id);
     fetchUserAddToCart();
+    if (!user) {
+      navigate("/login");
+      return;
+    }
     navigate("/cart");
   };
 
   return (
     <div className="container p-2 mx-auto">
+      <ToastContainer />
       <div className="">
         <div className="min-h-[200px] flex flex-col lg:flex-row gap-4 ">
           {/** product image */}

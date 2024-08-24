@@ -14,7 +14,7 @@ const VerticalCard = ({ loading, data = [] }) => {
   };
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-between md:gap-4 overflow-x-scroll scrollbar-hide transition-all gap-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-start  md:gap-4 overflow-x-scroll scrollbar-hide transition-all gap-2 w-full">
       {loading
         ? loadingList.map((product, index) => {
             return (

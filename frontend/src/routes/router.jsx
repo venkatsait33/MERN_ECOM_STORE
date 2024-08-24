@@ -1,20 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
 import App from "../App";
 import Login from "../pages/user/Login";
 import SignUp from "../pages/user/SignUp";
 import ForgotPassword from "../pages/user/ForgotPassword";
-import AdminPanel from "../pages/AdminPanel";
-import AllUsers from "../pages/user/AllUsers";
-import AllProducts from "../pages/product/AllProducts";
 import ProductCategoryList from "../components/category/ProductCategoryList";
 import ProductDetails from "../pages/product/ProductDetails";
-import Cart from "../pages/Cart";
-import SearchProduct from "../pages/SearchProduct";
-import Success from "../pages/Success";
-import Cancel from "../pages/Cancel";
-import Orders from "../pages/Orders";
-import AllOrders from "../pages/AllOrders";
+import { Cancel, Cart, Home, Orders, SearchProduct, Success } from "../pages";
+import { AdminPanel, AllOrders, AllProducts, AllUsers } from "../pages/admin-panel";
 
 const router = createBrowserRouter([
   {

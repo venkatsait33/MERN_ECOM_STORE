@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import Role from "../utils/Role";
+import Role from "../../utils/Role";
+import {  ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminPanel = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -112,6 +114,7 @@ const AdminPanel = () => {
       <main className="w-full h-full p-2">
         <Outlet />
       </main>
+      <ToastContainer />
     </div>
   );
 };

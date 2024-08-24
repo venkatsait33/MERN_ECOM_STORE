@@ -59,7 +59,6 @@ const UploadProduct = ({ onClose, fetchData }) => {
       body: JSON.stringify(data),
     });
     const apiData = await responseData.json();
-    console.log(apiData);
 
     if (apiData.success) {
       toast.success(apiData?.message);

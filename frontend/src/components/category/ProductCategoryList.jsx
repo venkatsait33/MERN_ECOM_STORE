@@ -87,9 +87,9 @@ const ProductCategoryList = () => {
   useEffect(() => {}, [sortBy]);
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-[200px,1fr] gap-3">
+      <div className="grid grid-cols-[200px,1fr] gap-3 ">
         {/* left Side */}
-        <div className=" p-2 min-h-[calc(100vh-120px)] shadow border space-y-2 overflow-y-scroll scrollbar-hide ">
+        <div className=" p-2 min-h-[calc(100vh-120px)] shadow border space-y-2 overflow-y-scroll scrollbar-hide   ">
           {/** sort by price */}
           <div>
             <h3 className="pb-1 text-base font-medium uppercase border-b border-slate-200">
@@ -149,7 +149,7 @@ const ProductCategoryList = () => {
           </div>
         </div>
         {/* Right Side */}
-        <div className="space-y-2 ">
+        <div className="w-full space-y-2">
           <p>Results:{data?.length}</p>
           <div className="min-h-[calc(100vh-120px)] overflow-y-scroll bg-base-200 max-h-[calc(100vh-120px)] scrollbar-hide">
             {data.length !== 0 && !loading && (
