@@ -101,7 +101,8 @@ const Cart = () => {
       body: JSON.stringify({ cartItems: data }),
     });
     const paymentResponse = await paymentData.json();
-    if (paymentResponse.session.id) {
+      console.log(paymentResponse);
+    if (paymentResponse?.session.id) {
       stripePromise.redirectToCheckout({
         sessionId: paymentResponse.session.id,
       });
