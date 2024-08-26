@@ -113,7 +113,7 @@ const Cart = () => {
     <div className="container mx-auto">
       <div>{data?.length === 0 && !loading && <div>Cart is Empty</div>}</div>
 
-      <div className="gap-2 p-4 md:flex md:justify-between">
+      <div className="gap-2 p-4 lg:flex lg:justify-between">
         {/* View Product */}
         <div className="w-full max-w-4xl ">
           {loading
