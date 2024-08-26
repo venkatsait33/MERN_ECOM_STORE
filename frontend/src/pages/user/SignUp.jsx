@@ -146,7 +146,7 @@ function SignUp() {
               </div>
             </div>
             <div className="mt-6 form-control">
-              <button className="btn btn-primary">Sing-Up</button>
+              <button className="btn btn-primary">Sign-Up</button>
             </div>
             <div className="mt-3">
               <h2 className="text-base text-center">
